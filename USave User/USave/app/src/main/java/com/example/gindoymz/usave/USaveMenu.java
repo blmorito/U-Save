@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -43,8 +45,8 @@ public class USaveMenu extends AppCompatActivity{
     private Button btnUsave;
     private Button btnBalance;
     private Button btnTransaction;
-
-    private TextView accountName;
+    private ImageButton imgButton;
+    private TextView accountName, txtAccountNo, txtBalance;
 
     private String accName;
     private String accNo;
@@ -56,11 +58,13 @@ public class USaveMenu extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.usavemenu_layout);
 
-        btnUsave = (Button)findViewById(R.id.btnUsave);
-        btnBalance = (Button)findViewById(R.id.btnBalance);
-        btnTransaction = (Button)findViewById(R.id.btnTransactions);
-        accountName = (TextView)findViewById(R.id.vendorName);
-
+        //btnUsave = (Button)findViewById(R.id.btnUsave);
+        //btnBalance = (Button)findViewById(R.id.btnBalance);
+        btnTransaction = (Button)findViewById(R.id.btnViewSavings);
+        accountName = (TextView)findViewById(R.id.txtAccountName);
+        txtAccountNo = (TextView) findViewById(R.id.txtAccountNo);
+        txtBalance = (TextView)findViewById(R.id.txtCurrentBalance);
+        imgButton = (ImageButton) findViewById(R.id.imageButton) ;
         Intent intent = getIntent();
         accNo = intent.getStringExtra("accountno");
 
@@ -72,33 +76,43 @@ public class USaveMenu extends AppCompatActivity{
             Toast.makeText(USaveMenu.this,"asdsd",Toast.LENGTH_LONG).show();
         }
 
-        btnUsave.setOnClickListener(new View.OnClickListener() {
+//        btnUsave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(USaveMenu.this,ScannerAct.class);
+//                intent.putExtra("accountNo", accNo);
+//                intent.putExtra("accountId", accId);
+//                startActivity(intent);
+//
+//            }
+//        });
+
+        imgButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(USaveMenu.this,ScannerAct.class);
                 intent.putExtra("accountNo", accNo);
                 intent.putExtra("accountId", accId);
                 startActivity(intent);
-
             }
         });
 
-        btnBalance.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(USaveMenu.this);
-                dialogBuilder.setMessage("PHP " + balance);
-                dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int id) {
-
-                    }
-                });
-
-                final AlertDialog alertDialog = dialogBuilder.create();
-                alertDialog.show();
-            }
-        });
+//        btnBalance.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(USaveMenu.this);
+//                dialogBuilder.setMessage(formatMoney(balance));
+//                dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int id) {
+//
+//                    }
+//                });
+//
+//                final AlertDialog alertDialog = dialogBuilder.create();
+//                alertDialog.show();
+//            }
+//        });
     }
 
     private void getAccount(String accountNo, String role) throws IOException {
@@ -144,7 +158,8 @@ public class USaveMenu extends AppCompatActivity{
                             accId = jObject.getString("userId");
                             balance = jObject.getString("avaiable_balance");
                             accountName.setText(accName);
-
+                            txtBalance.setText(formatMoney(balance));
+                            txtAccountNo.setText(jObject.getString("accountNo"));
 
                             accountName.setVisibility(View.VISIBLE);
                             btnUsave.setVisibility(View.VISIBLE);
@@ -157,5 +172,12 @@ public class USaveMenu extends AppCompatActivity{
                 });
             }
         });
+    }
+
+    private String formatMoney(String current_balance) {
+        double money = Double.parseDouble(current_balance);
+        DecimalFormat dFormat = new DecimalFormat("####,###,###.00");
+        return "PHP "+dFormat.format(money);
+
     }
 }

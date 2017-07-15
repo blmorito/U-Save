@@ -1,34 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<android.support.v4.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swiperefresh"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/vendorName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:text=""/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/btnUsave"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:text="USave"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#ff9d00">
 
-    <Button
-        android:id="@+id/btnBalance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:text="Check Balance"/>
+            <TextView
+                android:id="@+id/txtAccountName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="---"
+                android:textSize="20sp"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
+                android:gravity="center"/>
 
-    <Button
-        android:id="@+id/btnTransactions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:text="View Transactions"/>
-</LinearLayout>
+            <TextView
+                android:id="@+id/txtAccountNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="---"
+                android:textSize="17sp"
+                android:textColor="#FFFFFF"
+                android:gravity="center"/>
+
+            <TextView
+                android:id="@+id/txtCurrentBalance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="..."
+                android:textSize="37sp"
+                android:textColor="#FFFFFF"
+                android:gravity="center"
+                android:layout_marginBottom="10dp"
+                />
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="151dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/scan"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Scan QR"
+            android:textStyle="bold"
+            android:textSize="25sp"/>
+
+        <Button
+            android:id="@+id/btnViewSavings"
+            android:layout_marginTop="80dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:background="#1000c6"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:text="View Transaction" />
+
+
+    </LinearLayout>
+
+
+</android.support.v4.widget.SwipeRefreshLayout>

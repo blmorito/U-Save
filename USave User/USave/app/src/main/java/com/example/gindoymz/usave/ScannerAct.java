@@ -41,8 +41,8 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static com.example.gindoymz.usave.R.id.btnBalance;
-import static com.example.gindoymz.usave.R.id.btnUsave;
+//import static com.example.gindoymz.usave.R.id.btnBalance;
+//import static com.example.gindoymz.usave.R.id.btnUsave;
 
 public class ScannerAct extends AppCompatActivity {
     private SurfaceView mySurfaceView;
