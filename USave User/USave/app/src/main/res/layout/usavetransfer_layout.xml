@@ -29,12 +29,5 @@
         android:visibility="gone"
         android:hint="Enter amount"/>
 
-    <Button
-        android:id="@+id/btnProceed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:enabled="false"
-        android:text="Proceed"/>
-
 
 </LinearLayout>
