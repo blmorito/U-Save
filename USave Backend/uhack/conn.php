@@ -13,11 +13,4 @@ function commit(){
 function rollback(){
 	mysql_query("ROLLBACK");
 }
-
-function getUserAccount($id){
-	$query = mysql_query("select accountNo from users where u_id = '$id'");
-	$row = mysql_fetch_array($query);
-	$accountNo = $row['accountNo'];	
-	echo $accountNo;
-}
 ?>

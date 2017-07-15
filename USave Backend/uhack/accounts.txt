@@ -8,11 +8,11 @@
         "current_balance": "100000.0000"
     },
 	{
-		"account_no": "102019316862",
-		"currency": "PHP",
-		"account_name": "Wendell Madjus",
-		"status": "ACTIVE",
-		"avaiable_balance": "100000.0000",
-		"current_balance": "100000.0000"
+	"account_no": "102019316862",
+	"currency": "PHP",
+	"account_name": "Wendell Madjus",
+	"status": "ACTIVE",
+	"avaiable_balance": "100000.0000",
+	"current_balance": "100000.0000"
 	}
 ]
