@@ -54,10 +54,12 @@ if ($err) {
 	
 	if($result){
 		commit();
-		echo "success";
+		$data = ['result' => 'success'];
+		echo json_encode($data);
 	}else{
 		rollback();
-		echo "fail";
+		$data = ['result' => 'fail'];
+		echo json_encode($data);
 	}
 }
 ?>
