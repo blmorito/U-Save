@@ -43,17 +43,24 @@ if ($err) {
 } else {
 	$json = json_decode($response);
 	$accountNo = $json[0]->account_no;
-	$result = mysql_query("INSERT INTO users (username, password, email, accountNo, role) VALUES ('$userName', '$password', '$email', '$accountNo', '$role')");
-	
-	begin();
-	if($result){
-		commit();
-		$data = ['result' => 'success', 'userName' => $userName, 'accountNo' => $accountNo];
-		echo json_encode($data);
+	$query = mysql_query("select * from users where username='$userName' or email='$email'");
+	$rows = mysql_fetch_array($query);
+	if($rows>0){
+		$accountNo = $rows['accountNo'];
+		$data = ['result' => 'exists'];
+		echo json_encode($data);;
 	}else{
-		rollback();
-		$data = ['result' => 'fail', 'userName' => "", 'accountNo' => ""];
-		echo json_encode($data);
+		$result = mysql_query("INSERT INTO users (username, password, email, accountNo, role) VALUES ('$userName', '$password', '$email', '$accountNo', '$role')");
+		begin();
+		if($result){
+			commit();
+			$data = ['result' => 'success', 'userName' => $userName, 'accountNo' => $accountNo];
+			echo json_encode($data);
+		}else{
+			rollback();
+			$data = ['result' => 'fail', 'userName' => "", 'accountNo' => ""];
+			echo json_encode($data);
+		}
 	}
 }
 ?>
