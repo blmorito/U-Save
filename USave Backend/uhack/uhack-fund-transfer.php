@@ -16,6 +16,8 @@ $sourceAccount = $row2['accountNo'];
 $sourceCurrency = "PHP";
 $targetCurrency = "PHP";
 $amount = $json['amount'];
+$fee = $amount * 0.03;
+$totalFee = $amount - $fee;
 	curl_setopt_array($curl, array(
 	  CURLOPT_URL => "https://api-uat.unionbankph.com/uhac/sandbox/transfers/initiate",
 	  CURLOPT_RETURNTRANSFER => true,
@@ -51,7 +53,7 @@ $amount = $json['amount'];
 		if ($err) {
 		  echo "cURL Error #:" . $err;
 		} else {
-			$result = mysql_query("INSERT INTO transaction (vendor_id, user_id, amount, date_time) VALUES ('$vendorId', '$userId', '$amount', NOW())");
+			$result = mysql_query("INSERT INTO transaction (vendor_id, user_id, amount, fee, total_amount, date_time) VALUES ('$vendorId', '$userId', '$amount', '$fee', '$totalFee', NOW())");
 			begin();
 			
 			if($result){
