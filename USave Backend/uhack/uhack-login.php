@@ -8,7 +8,7 @@ $username = $json['username'];
 $password = $json['password'];
 
 $query = mysql_query("select * from users where username='$username' and password='$password'");
-$row = mysql_num_rows($query);
+$row = mysql_fetch_array($query);
 $accountNo = $row['accountNo'];
 if($row>0){
 		$data = ['result' => 'success', 'accountNo' => $accountNo];
