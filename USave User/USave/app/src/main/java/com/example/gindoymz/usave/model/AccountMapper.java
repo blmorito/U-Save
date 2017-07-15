@@ -1,4 +1,4 @@
-package com.newera.pnwy.uhackbank.model;
+package com.example.gindoymz.usave.model;
 
 import org.json.JSONException;
 import org.json.JSONObject;
