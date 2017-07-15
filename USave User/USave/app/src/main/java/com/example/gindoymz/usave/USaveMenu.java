@@ -1,8 +1,10 @@
 package com.example.gindoymz.usave;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -47,6 +49,7 @@ public class USaveMenu extends AppCompatActivity{
     private String accName;
     private String accNo;
     private String accId;
+    private String balance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,23 @@ public class USaveMenu extends AppCompatActivity{
                 intent.putExtra("accountId", accId);
                 startActivity(intent);
 
+            }
+        });
+
+        btnBalance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(USaveMenu.this);
+                dialogBuilder.setMessage("PHP " + balance);
+                dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int id) {
+
+                    }
+                });
+
+                final AlertDialog alertDialog = dialogBuilder.create();
+                alertDialog.show();
             }
         });
     }
@@ -120,9 +140,9 @@ public class USaveMenu extends AppCompatActivity{
                         try {
                             JSONArray jArr = new JSONArray(resp);
                             JSONObject jObject = jArr.getJSONObject(0);
-                            Toast.makeText(USaveMenu.this,resp,Toast.LENGTH_LONG).show();
                             accName = jObject.getString("account_name");
                             accId = jObject.getString("userId");
+                            balance = jObject.getString("avaiable_balance");
                             accountName.setText(accName);
 
 
