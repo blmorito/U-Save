@@ -49,7 +49,7 @@ curl_close($curl);
 if ($err) {
   echo "cURL Error #:" . $err;
 } else {
-	$result = mysql_query("INSERT INTO transaction (vendor_id, user_id, amount) VALUES ('$vendorId', '$userId', '$amount')");
+	$result = mysql_query("INSERT INTO transaction (vendor_id, user_id, amount, date_time) VALUES ('$vendorId', '$userId', '$amount', NOW())");
 	begin();
 	
 	if($result){
