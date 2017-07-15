@@ -57,6 +57,7 @@ public class ScannerAct extends AppCompatActivity {
     private String amount;
     private String pin;
     private String vendorId;
+    private Double change;
 
     private int my_request_code = 0;
     @Override
@@ -76,60 +77,60 @@ public class ScannerAct extends AppCompatActivity {
 
         Intent intent = getIntent();
         vendorId = intent.getStringExtra("accountId");
+        change = intent.getDoubleExtra("change",0.0);
+
+//        txtAmount.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//
+//            }
+//
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//                if (!txtAmount.getText().toString().isEmpty());
+//                 btnProceed.setEnabled(true);
+//            }
+//
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//
+//            }
+//        });
 
 
-        txtAmount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
+//        dialogBuilder.setView(dialogView);
+//
+//        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int id) {
+//                if (tPin.toString().isEmpty())
+//                    Toast.makeText(ScannerAct.this, "Please input pin", Toast.LENGTH_LONG).show();
+//                else {
+//                    pin = tPin.getText().toString();
+//                    try {
+//                        fundTransfer(textView.getText().toString(),vendorId,txtAmount.getText().toString(),pin);
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            }
+//        });
+//        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int id) {
+//
+//            }
+//        });
 
-            }
+//        final AlertDialog alertDialog = dialogBuilder.create();
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (!txtAmount.getText().toString().isEmpty());
-                 btnProceed.setEnabled(true);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        dialogBuilder.setView(dialogView);
-
-        dialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-                if (tPin.toString().isEmpty())
-                    Toast.makeText(ScannerAct.this, "Please input pin", Toast.LENGTH_LONG).show();
-                else {
-                    pin = tPin.getText().toString();
-                    try {
-                        fundTransfer(textView.getText().toString(),vendorId,txtAmount.getText().toString(),pin);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int id) {
-
-            }
-        });
-
-        final AlertDialog alertDialog = dialogBuilder.create();
-
-        btnProceed.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertDialog.show();
-            }
-        });
+//        btnProceed.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                alertDialog.show();
+//            }
+//        });
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.CAMERA)
@@ -147,11 +148,17 @@ public class ScannerAct extends AppCompatActivity {
                 textView.post(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText(data);
-                        if (!data.isEmpty()) {
-                            accountNo = data;
-                            txtAmount.setVisibility(View.VISIBLE);
-                        }
+                        Intent intent = new Intent(ScannerAct.this,Checkout.class);
+                        intent.putExtra("change", change);
+                        intent.putExtra("customer_acc_no",data);
+                        intent.putExtra("vendor_id",vendorId);
+                        startActivity(intent);
+
+//                        textView.setText(data);
+//                        if (!data.isEmpty()) {
+//                            accountNo = data;
+//                            txtAmount.setVisibility(View.VISIBLE);
+//                        }
                     }
                 });
             }

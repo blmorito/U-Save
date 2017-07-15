@@ -1,10 +1,8 @@
 package com.example.gindoymz.usave;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gindoymz.usave.util.RadAPI;
-import com.google.android.gms.vision.text.Text;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,22 +29,18 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-import static android.R.attr.vendor;
-import static com.example.gindoymz.usave.R.id.login;
-import static com.example.gindoymz.usave.R.id.username;
-
 /**
  * Created by gindoymz on 15/07/2017.
  */
 
 public class USaveMenu extends AppCompatActivity{
 
-    private Button btnUsave;
+    private Button btnUsave, btnProcess;
     private Button btnBalance;
     private Button btnTransaction;
     private ImageButton imgButton;
     private TextView accountName, txtAccountNo, txtBalance;
-
+    private EditText edtChange;
     private String accName;
     private String accNo;
     private String accId;
@@ -61,13 +54,15 @@ public class USaveMenu extends AppCompatActivity{
         //btnUsave = (Button)findViewById(R.id.btnUsave);
         //btnBalance = (Button)findViewById(R.id.btnBalance);
         btnTransaction = (Button)findViewById(R.id.btnViewSavings);
-        accountName = (TextView)findViewById(R.id.txtAccountName);
+        accountName = (TextView)findViewById(R.id.txtAccountNameCheckout);
         txtAccountNo = (TextView) findViewById(R.id.txtAccountNo);
         txtBalance = (TextView)findViewById(R.id.txtCurrentBalance);
-        imgButton = (ImageButton) findViewById(R.id.imageButton) ;
+        //imgButton = (ImageButton) findViewById(R.id.imageButton) ;
         Intent intent = getIntent();
         accNo = intent.getStringExtra("accountno");
 
+        edtChange = (EditText) findViewById(R.id.edtChange);
+        btnProcess = (Button) findViewById(R.id.btnProcess);
 
         try {
             getAccount(accNo,"vendor");
@@ -75,6 +70,20 @@ public class USaveMenu extends AppCompatActivity{
             e.printStackTrace();
             Toast.makeText(USaveMenu.this,"asdsd",Toast.LENGTH_LONG).show();
         }
+
+        btnProcess.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!edtChange.getText().toString().isEmpty()){
+                    Intent intent = new Intent(USaveMenu.this,ScannerAct.class);
+                    intent.putExtra("accountNo", accNo);
+                    intent.putExtra("accountId", accId);
+                    intent.putExtra("change",Double.parseDouble(edtChange.getText().toString()));
+                    startActivity(intent);
+                }
+            }
+        });
+
 
 //        btnUsave.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -87,15 +96,15 @@ public class USaveMenu extends AppCompatActivity{
 //            }
 //        });
 
-        imgButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(USaveMenu.this,ScannerAct.class);
-                intent.putExtra("accountNo", accNo);
-                intent.putExtra("accountId", accId);
-                startActivity(intent);
-            }
-        });
+//        imgButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(USaveMenu.this,ScannerAct.class);
+//                intent.putExtra("accountNo", accNo);
+//                intent.putExtra("accountId", accId);
+//                startActivity(intent);
+//            }
+//        });
 
 //        btnBalance.setOnClickListener(new View.OnClickListener() {
 //            @Override

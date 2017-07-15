@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.gindoymz.usave.util.RadAPI;
+import com.example.gindoymz.usave.util.VendorSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -110,6 +111,7 @@ public class USaveMain extends AppCompatActivity {
                             JSONObject jObject = new JSONObject(resp);
                             if (jObject.getString("result").toString().equals("success")) {
                                 intent.putExtra("accountno", jObject.getString("accountNo"));
+                                VendorSession.getInstance().setAccountNo(jObject.getString("accountNo"));
                                 startActivity(intent);
                             }
                             else
