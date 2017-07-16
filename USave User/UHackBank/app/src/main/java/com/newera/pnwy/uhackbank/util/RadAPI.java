@@ -7,6 +7,8 @@ package com.newera.pnwy.uhackbank.util;
 public class RadAPI {
 
     public static String BASE_URL = "http://192.168.43.59/";
-    public static String CREATE_ACCOUNT = "uhack/uhack-get-account.php";
+    public static String CREATE_ACCOUNT = "uhack/uhack-request-account.php";
     public static String LOG_IN = "uhack/uhack-login.php";
+    public static String GET_ACCOUNT = "uhack/uhack-get-account.php";
+
 }

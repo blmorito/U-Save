@@ -1,6 +1,7 @@
 package com.newera.pnwy.uhackbank;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -62,6 +63,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,OpenAccount.class));
+            }
+        });
+
 
 //        textView = (TextView) findViewById(R.id.textView);
 //        String accountNo = "102019316862";
@@ -74,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void checkCredentials(String username, String password) throws IOException{
+    private void checkCredentials(final String username, String password) throws IOException{
         final ProgressDialog pd = new ProgressDialog(MainActivity.this);
         pd.setMessage("Checking credentials..");
         pd.show();
@@ -82,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
         OkHttpClient client = new OkHttpClient();
         String postBody = "{\n" +
                 "    \"username\": \""+username+"\",\n" +
+                "    \"role\": \""+"user"+"\",\n" +
                 "    \"password\": \""+password+"\"\n" +
                 "}";
         Log.d("WEEEEEEW", postBody);
@@ -93,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
                 .post(body)
                 .build();
 
-        Log.d("DEB",body.toString());
+        Log.d("DEB",req.toString());
         client.newCall(req).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -109,7 +118,23 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(MainActivity.this,resp,Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this,resp,Toast.LENGTH_SHORT).show();
+                        try {
+                            JSONObject json = new JSONObject(resp);
+                            if(json.getString("result")!= null && json.getString("result").equals("success")){
+                                Intent intent = new Intent(MainActivity.this, Home.class);
+                                intent.putExtra("username", username);
+                                intent.putExtra("accountNo", json.getString("accountNo"));
+                                startActivity(intent);
+                            }else{
+                                Toast.makeText(MainActivity.this,"Server Error",Toast.LENGTH_SHORT).show();
+                            }
+
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             }
