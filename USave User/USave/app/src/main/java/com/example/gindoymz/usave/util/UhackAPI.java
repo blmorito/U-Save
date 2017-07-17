@@ -12,8 +12,8 @@ public class UhackAPI {
     public static String REQUEST_TEST_ACCOUNT = "test/accounts";
 
     //API KEYS -- need to secure
-    public static String CLIENT_ID = "ed000e77-71f0-4592-991d-aa1bd4bc49cc";
-    public static String CLIENT_SECRET = "qV7gL5oL8kX2rL7tR3jX5dO7fC8iX4pL5kU7kX5lG1fB7dT7yK";
+    public static String CLIENT_ID = "REPLACE_WITH_PROVIDED_CLIENT_ID";
+    public static String CLIENT_SECRET = "REPLACE_WITH_PROVIDED_CLIENT_ID_SECRET";
 
 
     //headers
