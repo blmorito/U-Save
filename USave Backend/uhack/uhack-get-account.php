@@ -17,8 +17,8 @@ curl_setopt_array($curl, array(
   CURLOPT_CUSTOMREQUEST => "GET",
   CURLOPT_HTTPHEADER => array(
     "accept: application/json",
-    "x-ibm-client-id: ed000e77-71f0-4592-991d-aa1bd4bc49cc",
-    "x-ibm-client-secret: qV7gL5oL8kX2rL7tR3jX5dO7fC8iX4pL5kU7kX5lG1fB7dT7yK"
+    "x-ibm-client-id: REPLACE_WITH_CLIENT_ID",
+    "x-ibm-client-secret: REPLACE_WITH_CLIENT_ID"
   ),
 ));
 
