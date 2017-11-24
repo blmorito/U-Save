@@ -1,7 +1,9 @@
 # U-Save
 <p>Our entry for the U:Hack UnionBank hackathon in Cebu, 2017.</p>
 <p>This placed 2nd Runner up on the SME Category.</p>
-
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=FtoemBd2iuE
+" target="_blank"><img src="http://img.youtube.com/vi/FtoemBd2iuE/1.jpg" 
+alt="Unionbank Hackathon held last July 15 and 16 at the Cebu Trade Hall, SM City Cebu" width="360" height="190" border="10" /></a>
 
 ## Brief Description
 U-Save is an app for SMEs to provide a way for their customers to receive their change from their cash purchases to be digitally transferred to the customers' bank account. This helps encourage people to be more keen to saving money and avoid temptations to buy unnecessary things when going about their day to day life.
